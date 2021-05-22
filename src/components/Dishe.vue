@@ -28,7 +28,7 @@
     </q-card-actions>
 
     <q-dialog v-model="showFormDishe">
-      <form-dishe action="modifier" />
+      <form-dishe action="modify" v-bind:initialDish="dishe" />
     </q-dialog>
 
     <q-dialog v-model="showDeletionConfirmation">

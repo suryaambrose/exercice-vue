@@ -71,10 +71,10 @@
 
 <script>
 export default {
-  props: ["action"],
+  props: ["action", "initialDish"],
   data() {
     return {
-      dishe: {
+      dishe: this.initialDish ? { ...this.initialDish } : {
         name: "",
         description: "",
         note: 1,
@@ -88,6 +88,8 @@ export default {
       if(this.$refs.name.validate() && this.$refs.description.validate()) {
         if(this.action == "add") {
           this.$store.dispatch('addDish', this.dishe);
+        } else if(this.action == "modify") {
+          this.$store.dispatch('modifyDish', this.dishe);
         }
       }
     }

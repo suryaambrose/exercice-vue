@@ -54,6 +54,21 @@ const tasksModule = {
       ];
       state.nextId += 1;
     },
+    modifyDish (state, updatedDish) {
+      // Modify the dishes list content
+      // Their were several strategies possible. I chose this one
+      // to keep the insertion order.
+      // This gives a nicer result as dishes are not reordered on the page
+      // after a modification
+      const indexToReplace = state.dishes.findIndex(dish => dish.id == updatedDish.id)
+      state.dishes = [
+        ...state.dishes.slice(0, indexToReplace),
+        {
+          ...updatedDish,
+        },
+        ...state.dishes.slice(indexToReplace + 1),
+      ];
+    },
     removeDish (state, dishIdToRemove) {
       // filter dishes to remove unwanted element
       state.dishes = state.dishes.filter(dish => dish.id != dishIdToRemove);
@@ -62,6 +77,9 @@ const tasksModule = {
   actions: {
     addDish ({ commit }, newDish) {
       commit('addDish', newDish);
+    },
+    modifyDish ({ commit }, updatedDish) {
+      commit('modifyDish', updatedDish);
     },
     removeDish ({ commit }, dishIdToRemove) {
       commit('removeDish', dishIdToRemove);
