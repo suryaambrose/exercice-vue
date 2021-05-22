@@ -1,6 +1,6 @@
 <template>
   <q-card class="card">
-    <q-img :src="dishe.image" basic contain>
+    <q-img :src="dishe.image ? dishe.image : 'statics/image-placeholder.png'" basic contain>
       <div class="absolute-bottom text-h6">
         {{ dishe.name }}
       </div>
