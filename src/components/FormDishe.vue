@@ -6,16 +6,30 @@
 
     <q-card-section>
       <div class="row q-mb-md">
-        <q-input filled v-model="dishe.name" label="Nom (Burger)" class="col" />
+        <q-input
+          filled
+          ref="name"
+          v-model="dishe.name"
+          label="Nom (Burger)"
+          class="col"
+          :rules="[
+            val => !!val || 'Un bon plat a besoin d\'un nom',
+            val => val.length <= 20 || '20 caractères maxi. Pensons aux ours polaires :)',
+          ]"
+          lazy-rules="ondemand"
+        />
       </div>
 
       <div class="row q-mb-md">
         <q-input
           filled
+          ref="description"
           v-model="dishe.description"
           label="Description"
           type="textarea"
           class="col"
+          :rules="[val => val.length <= 135 || 'Les meilleurs descriptions sont concises. Peux-tu tout faire tenir en 135 caractères :) ?']"
+          lazy-rules="ondemand"
         />
       </div>
 
@@ -45,7 +59,7 @@
 
     <q-card-actions align="right">
       <q-btn label="Annuler" color="grey" v-close-popup />
-      <q-btn label="Sauver" color="primary" v-close-popup />
+      <q-btn @click="validateForm" label="Sauver" color="primary"/>
     </q-card-actions>
   </q-card>
 </template>
@@ -62,7 +76,12 @@ export default {
         image: ""
       }
     };
-  }
+  },
+  methods: {
+    validateForm () {
+      return this.$refs.name.validate() && this.$refs.description.validate();
+    }
+  },
 };
 </script>
 
