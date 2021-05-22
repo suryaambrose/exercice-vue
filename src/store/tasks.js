@@ -38,6 +38,17 @@ const tasksModule = {
   getters: {
     dishes: state => state.dishes,
   },
+  mutations: {
+    removeDish (state, dishIdToRemove) {
+      // filter dishes to remove unwanted element
+      state.dishes =  state.dishes.filter(dish => dish.id != dishIdToRemove);
+    }
+  },
+  actions: {
+    removeDish ({ commit }, dishIdToRemove) {
+      commit('removeDish', dishIdToRemove);
+    }
+  },
 };
 
 export default tasksModule;
