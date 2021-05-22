@@ -59,7 +59,12 @@
 
     <q-card-actions align="right">
       <q-btn label="Annuler" color="grey" v-close-popup />
-      <q-btn @click="validateForm" label="Sauver" color="primary"/>
+      <q-btn
+        @click="validateForm"
+        label="Sauver"
+        color="primary"
+        v-close-popup="dishe.name.length > 0 && dishe.name.length <= 20 && dishe.description.length <= 135"
+      />
     </q-card-actions>
   </q-card>
 </template>
