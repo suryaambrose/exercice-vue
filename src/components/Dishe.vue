@@ -18,6 +18,7 @@
 
     <q-card-section>
       {{ dishe.description }}
+      <span v-if="!dishe.description" class="text-italic">Aucun description fournie</span>
     </q-card-section>
 
     <q-card-actions class="absolute-bottom" align="right">
