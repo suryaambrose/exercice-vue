@@ -24,12 +24,27 @@
       <q-btn @click="showFormDishe = true" icon="edit" color="blue" flat
         >Modifier</q-btn
       >
-      <q-btn @click="deleteDish()" icon="delete" color="red" flat>Supprimer</q-btn>
+      <q-btn @click="showDeletionConfirmation = true" icon="delete" color="red" flat>Supprimer</q-btn>
     </q-card-actions>
 
     <q-dialog v-model="showFormDishe">
       <form-dishe action="modifier" />
     </q-dialog>
+
+    <q-dialog v-model="showDeletionConfirmation">
+      <q-card>
+        <q-card-section class="row items-center">
+          <q-icon name="delete_forever" color="red" size="md"/>
+          <span class="q-ml-sm">C'est pourtant un super plat. Êtes-vous sûr ?</span>
+        </q-card-section>
+
+        <q-card-actions align="right">
+          <q-btn flat label="Annuler" color="primary" v-close-popup />
+          <q-btn @click="deleteDish()" flat label="Supprimer" color="primary" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
+
   </q-card>
 </template>
 
@@ -38,7 +53,8 @@ export default {
   props: ["dishe"],
   data() {
     return {
-      showFormDishe: false
+      showFormDishe: false,
+      showDeletionConfirmation: false,
     };
   },
   components: {
