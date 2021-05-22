@@ -60,7 +60,7 @@
     <q-card-actions align="right">
       <q-btn label="Annuler" color="grey" v-close-popup />
       <q-btn
-        @click="validateForm"
+        @click="save"
         label="Sauver"
         color="primary"
         v-close-popup="dishe.name.length > 0 && dishe.name.length <= 20 && dishe.description.length <= 135"
@@ -78,13 +78,18 @@ export default {
         name: "",
         description: "",
         note: 1,
-        image: ""
+        image: "",
+        id: this.$store.getters.newDishId,
       }
     };
   },
   methods: {
-    validateForm () {
-      return this.$refs.name.validate() && this.$refs.description.validate();
+    save () {
+      if(this.$refs.name.validate() && this.$refs.description.validate()) {
+        if(this.action == "add") {
+          this.$store.dispatch('addDish', this.dishe);
+        }
+      }
     }
   },
 };
