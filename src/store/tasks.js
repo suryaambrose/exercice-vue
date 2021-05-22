@@ -35,6 +35,9 @@ const tasksModule = {
       }
     ]
   }),
+  getters: {
+    dishes: state => state.dishes,
+  },
 };
 
 export default tasksModule;

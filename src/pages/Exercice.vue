@@ -19,6 +19,11 @@ export default {
       showFormDishe: false
     };
   },
+  computed: {
+    dishes () {
+      return this.$store.getters.dishes;
+    }
+  },
   components: {
     dishe: require("components/Dishe.vue").default,
     "add-button": require("components/AddButton.vue").default,
